@@ -8,7 +8,12 @@ import zhCn from "element-plus/dist/locale/zh-cn.mjs"
 import "virtual:svg-icons-register"
 // 注册全局组件
 import globalComponent from "@/components/index.ts"
+// 引入全局样式
 import "@/styles/index.scss"
+// 路由
+import router from "@/router/index.ts"
+// 仓库
+import store from "@/store/index.ts"
 
 const app = createApp(App)
 
@@ -16,4 +21,7 @@ app.use(ElementPlus, {
     locale: zhCn,
 })
 app.use(globalComponent)
+app.use(router)
+app.use(store)
+
 app.mount("#app")
