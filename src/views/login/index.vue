@@ -3,11 +3,15 @@
         <el-row>
             <el-col :span="14" :xs="0"></el-col>
             <el-col :span="10" :xs="24">
-                <el-form ref="form" label-width="80px" class="login_form">
+                <el-form ref="loginFormRef" class="login_form" :model="loginForm" :rules="rules">
                     <h1>Hello</h1>
                     <h2>欢迎来到硅谷甄选</h2>
-                    <el-input :prefix-icon="User" v-model="loginForm.username"></el-input>
-                    <el-input type="password" :prefix-icon="Lock" v-model="loginForm.password" show-password></el-input>
+                    <el-form-item prop="username">
+                        <el-input :prefix-icon="User" v-model="loginForm.username"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="password">
+                        <el-input type="password" :prefix-icon="Lock" v-model="loginForm.password" show-password></el-input>
+                    </el-form-item>
                     <el-button :loading="loading" type="primary" size="default" @click="login">登录</el-button>
                 </el-form>
             </el-col>
@@ -20,7 +24,8 @@ import { User, Lock } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
 import useUserStore from '@/store/modules/user'
 import { useRouter } from 'vue-router'
-import { ElNotification } from 'element-plus'
+import { ElNotification, FormRules } from 'element-plus'
+import { getTime } from '@/utils/time'
 
 
 
@@ -28,11 +33,27 @@ let loginForm = reactive({
     'username': 'admin',
     'password': 'atguigu123 '
 })
+// 表单验证规则
+const rules = reactive<FormRules>({
+    username: [
+        { required: true, message: '请输入用户名', trigger: 'blur' },
+        { min: 4, max: 10, message: '用户名在4-10位之间', trigger: 'blur' }
+    ],
+    password: [
+        { required: true, message: '请输入密码', trigger: 'blur' },
+        { min: 6, message: '密码长度至少六位', trigger: 'blur' }
+    ]
+})
+// 表单验证
+let loginFormRef = ref()
 const userStore = useUserStore()
 let router = useRouter()
 // 控制加载状态
 let loading = ref(false)
-const login = () => {
+// 控制显示信息
+let message = getTime()
+const login = async () => {
+    await loginFormRef.value.validate()
     loading.value = true
     userStore.userLogin(loginForm).then(resp => {
         // 成功的回调 跳转到首页
@@ -40,8 +61,8 @@ const login = () => {
         console.log(resp);
 
         ElNotification({
-            title: '登录成功',
-            message: 'resp.message',
+            title: `Hi,${message}`,
+            message: '欢迎回来',
             type: 'success',
             duration: 3000,
         })
@@ -60,7 +81,6 @@ const login = () => {
     });
 
 }
-
 
 </script>
 
@@ -93,7 +113,6 @@ const login = () => {
 
     .el-input {
         max-width: 500px;
-        margin-bottom: 20px;
     }
 
     .el-button {
