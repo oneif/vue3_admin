@@ -2,7 +2,7 @@
 import { defineStore } from "pinia"
 import { ref } from "vue"
 // 导入接口
-import { login, getInfo } from "@/api/users"
+import { login, getInfo, logout } from "@/api/users"
 import type { loginForm } from "@/api/users/type"
 import type { RouteRecordRaw } from "vue-router"
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from "@/utils/token"
@@ -18,9 +18,7 @@ let useUserStore = defineStore("User", () => {
                 token.value = resp.data
                 SET_TOKEN(resp.data)
                 return Promise.resolve(resp)
-            } else {
-                return Promise.reject(resp)
-            }
+            } else return Promise.reject(resp)
         })
     }
     let username = ref("")
@@ -32,16 +30,21 @@ let useUserStore = defineStore("User", () => {
                 username.value = resp.data.name
                 avatar.value = resp.data.avatar
                 return Promise.resolve(resp)
-            } else return Promise.reject("获取用户信息失败")
+            } else return Promise.reject(new Error(resp.message))
         })
     }
 
     // 退出登录的方法
-    const userLogout = () => {
-        token.value = null
-        REMOVE_TOKEN()
-        username.value = ""
-        avatar.value = ""
+    const userLogout = async () => {
+        await logout().then((resp) => {
+            if (resp.code == 200) {
+                REMOVE_TOKEN()
+                token.value = null
+                username.value = ""
+                avatar.value = ""
+                return Promise.resolve(resp.message)
+            } else return Promise.reject(new Error(resp.message))
+        })
     }
 
     // 仓库存储生成菜单需要的路由

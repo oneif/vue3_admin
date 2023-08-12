@@ -33,11 +33,10 @@ router.beforeEach(
                         // token过期:获取不到用户信息了
                         // 用户修改了本地存储的token
                         // do->退出登录 清空用户相关的数据
-                        userStore.userLogout()
+                        await userStore.userLogout()
                         next("/login")
                     }
                 }
-                next()
             }
         } else {
             // 没有token

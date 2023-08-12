@@ -1,0 +1,128 @@
+.
+|-- README.md
+|-- index.html
+|-- list.txt
+|-- package-lock.json
+|-- package.json
+|-- public
+|   |-- 6580faa39a7fdbbd2aca3a6cd214a000.png
+|   |-- huawei.png
+|   `-- huawei_logo.png
+|-- src
+|   |-- App.vue
+|   |-- api
+|   |   |-- acl
+|   |   |-- products
+|   |   |   |-- attr
+|   |   |   |-- sku
+|   |   |   |-- spu
+|   |   |   `-- trademark
+|   |   |       |-- index.ts
+|   |   |       `-- type.ts
+|   |   `-- users
+|   |       |-- index.ts
+|   |       `-- type.ts
+|   |-- assets
+|   |   |-- icons
+|   |   |   |-- arrow-down.svg
+|   |   |   |-- attr.svg
+|   |   |   |-- copyright.svg
+|   |   |   |-- delete.svg
+|   |   |   |-- edit.svg
+|   |   |   |-- exit-full-screen.svg
+|   |   |   |-- full-screen.svg
+|   |   |   |-- home.svg
+|   |   |   |-- loading.svg
+|   |   |   |-- lock.svg
+|   |   |   |-- logout.svg
+|   |   |   |-- permission.svg
+|   |   |   |-- phone.svg
+|   |   |   |-- plus.svg
+|   |   |   |-- product.svg
+|   |   |   |-- refresh.svg
+|   |   |   |-- role.svg
+|   |   |   |-- screen.svg
+|   |   |   |-- sku.svg
+|   |   |   |-- spu.svg
+|   |   |   |-- trademark.svg
+|   |   |   |-- upload.svg
+|   |   |   |-- user.svg
+|   |   |   `-- welcome.svg
+|   |   `-- images
+|   |       |-- background.jpg
+|   |       |-- error_images
+|   |       |   |-- 401.png
+|   |       |   |-- 404.png
+|   |       |   `-- cloud.png
+|   |       |-- login_form.png
+|   |       |-- notData.png
+|   |       `-- tabbar-bg.png
+|   |-- components
+|   |   |-- SvgIcon
+|   |   |   `-- index.vue
+|   |   `-- index.ts
+|   |-- layout
+|   |   |-- index.vue
+|   |   |-- logo
+|   |   |   `-- index.vue
+|   |   |-- main
+|   |   |   `-- index.vue
+|   |   |-- menu
+|   |   |   `-- index.vue
+|   |   `-- tabbar
+|   |       |-- breadcrumb
+|   |       |   `-- index.vue
+|   |       |-- index.vue
+|   |       `-- setting
+|   |           `-- index.vue
+|   |-- main.ts
+|   |-- router
+|   |   |-- index.ts
+|   |   |-- permission.ts
+|   |   `-- routers.ts
+|   |-- store
+|   |   |-- index.ts
+|   |   `-- modules
+|   |       |-- setting.ts
+|   |       |-- types
+|   |       |   `-- type.ts
+|   |       `-- user.ts
+|   |-- styles
+|   |   |-- index.scss
+|   |   |-- reset.scss
+|   |   `-- variable.scss
+|   |-- utils
+|   |   |-- request.ts
+|   |   |-- time.ts
+|   |   `-- token.ts
+|   |-- views
+|   |   |-- 404
+|   |   |   `-- index.vue
+|   |   |-- acl
+|   |   |   |-- permission
+|   |   |   |   `-- index.vue
+|   |   |   |-- role
+|   |   |   |   `-- index.vue
+|   |   |   `-- user
+|   |   |       `-- index.vue
+|   |   |-- home
+|   |   |   `-- index.vue
+|   |   |-- login
+|   |   |   `-- index.vue
+|   |   |-- product
+|   |   |   |-- attr
+|   |   |   |   `-- index.vue
+|   |   |   |-- sku
+|   |   |   |   `-- index.vue
+|   |   |   |-- spu
+|   |   |   |   `-- index.vue
+|   |   |   `-- trademark
+|   |   |       `-- index.vue
+|   |   `-- screen
+|   |       `-- index.vue
+|   `-- vite-env.d.ts
+|-- tsconfig.json
+|-- tsconfig.node.json
+`-- vite.config.ts
+
+43 directories, 82 files

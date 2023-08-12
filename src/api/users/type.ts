@@ -24,3 +24,7 @@ export interface userInfoResponseData extends ResponseData {
         avatar: string
     }
 }
+// 退出登录接口返回的数据类型
+export interface logoutResponseData extends ResponseData {
+    data: null
+}
