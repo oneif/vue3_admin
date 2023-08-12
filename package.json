@@ -16,6 +16,7 @@
     "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
     "element-plus": "^2.3.9",
+    "nprogress": "^0.2.0",
     "pinia": "^2.1.6",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.9",
     "@types/node": "^20.4.8",
+    "@types/nprogress": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
     "@vitejs/plugin-vue": "^4.2.3",

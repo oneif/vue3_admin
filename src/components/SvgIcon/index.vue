@@ -1,5 +1,5 @@
 <template>
-    <svg :style="{ width, height }">
+    <svg :style="{ width, height }" class="svg">
         <use :href="prefix + iconName" :fill="color" />
     </svg>
 </template>
@@ -27,5 +27,4 @@ defineProps({
     }
 })
 </script>
-
-<style scoped></style>
+<style scoped lang="scss"></style>

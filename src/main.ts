@@ -12,6 +12,8 @@ import globalComponent from "@/components/index.ts"
 import "@/styles/index.scss"
 // 路由
 import router from "@/router/index.ts"
+// 路由守卫
+import "@/router/permission"
 // 仓库
 import store from "@/store/index.ts"
 

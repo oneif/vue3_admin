@@ -11,6 +11,6 @@ export const login = (data: loginForm) => {
     return request.post<any, loginResponseData>(API.LOGIN_URL, data)
 }
 // 获取用户信息
-export const getUserInfo = () => {
+export const getInfo = () => {
     return request.get<any, userInfoResponseData>(API.USERINFO_URL)
 }

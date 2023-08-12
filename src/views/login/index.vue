@@ -31,7 +31,7 @@ import { getTime } from '@/utils/time'
 
 let loginForm = reactive({
     'username': 'admin',
-    'password': 'atguigu123 '
+    'password': 'atguigu123'
 })
 // 表单验证规则
 const rules = reactive<FormRules>({
@@ -58,7 +58,6 @@ const login = async () => {
     userStore.userLogin(loginForm).then(resp => {
         // 成功的回调 跳转到首页
         router.push('/')
-        console.log(resp);
 
         ElNotification({
             title: `Hi,${message}`,
