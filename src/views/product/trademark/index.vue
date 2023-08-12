@@ -1,72 +1,75 @@
 <template>
-    <el-card class="box-card">
-        <el-button color="#4527a0" @click="addTrademark">
-            <SvgIcon :iconName="'plus'" :color="'white'" />添加品牌
-        </el-button>
-        <!-- 表格 -->
-        <el-table :data="tradeMarkArr" border style="margin: 10px 0;">
-            <el-table-column prop="id" label="序号" width="80" align="center" />
-            <el-table-column prop="tmName" label="品牌名称" />
-            <el-table-column prop="logoUrl" label="品牌LOGO">
-                <template #="{ row }">
-                    <img :src="row.logoUrl" style="width:90px;height: 90px;object-fit: scale-down;">
-                </template>
-            </el-table-column>
-            <el-table-column prop="address" label="品牌操作">
-                <template #="{ row }">
-                    <el-button size="default" @click="editTrademark(row)" color="#3f51b5">
-                        <SvgIcon :iconName="'edit'" :color="'white'" :width="'18px'" :height="'18px'" />
+    <div>
+        <el-card class="box-card">
+            <el-button color="#4527a0" @click="addTrademark">
+                <SvgIcon :iconName="'plus'" :color="'white'" />添加品牌
+            </el-button>
+            <!-- 表格 -->
+            <el-table :data="tradeMarkArr" border style="margin: 10px 0;">
+                <el-table-column prop="id" label="序号" width="80" align="center" />
+                <el-table-column prop="tmName" label="品牌名称" />
+                <el-table-column prop="logoUrl" label="品牌LOGO">
+                    <template #="{ row }">
+                        <img :src="row.logoUrl" style="width:90px;height: 90px;object-fit: scale-down;">
+                    </template>
+                </el-table-column>
+                <el-table-column prop="address" label="品牌操作">
+                    <template #="{ row }">
+                        <el-button size="default" @click="editTrademark(row)" color="#3f51b5">
+                            <SvgIcon :iconName="'edit'" :color="'white'" :width="'18px'" :height="'18px'" />
+                        </el-button>
+                        <el-popconfirm width="250" confirm-button-text="删除" confirm-button-type="danger"
+                            @confirm="removeTrademark(row.id)" cancel-button-text="取消" :icon="Delete" icon-color='#e75e61'
+                            :title="`确定要删除 ${row.tmName} 吗？`">
+                            <template #reference>
+                                <el-button size="default" @click="" color="#dd191d">
+                                    <SvgIcon :iconName="'delete'" :color="'white'" :width="'18px'" :height="'18px'" />
+                                </el-button>
+                            </template>
+                        </el-popconfirm>
+
+                    </template>
+                </el-table-column>
+            </el-table>
+            <!-- 分页器 -->
+            <el-pagination v-model:current-page="pageNum" v-model:page-size="pageLimt" @current-change="getTradeMarkData"
+                @size-change="getTradeMarkData()" :page-sizes="[5, 10, 20, 50]"
+                layout="total, sizes, prev, pager, next, jumper" :total="total" />
+        </el-card>
+
+
+        <!-- 对话框 -->
+        <el-dialog v-model="dialogFormVisible" :title="trademarkParams.id ? '修改品牌' : '添加品牌'" style="width: 700px;">
+            <el-form :model="trademarkParams" :rules="rules" ref="formRef">
+                <el-form-item label="品牌名称" label-width="100px" prop="tmName">
+                    <el-input autocomplete="off" placeholder="请输入品牌名称" v-model="trademarkParams.tmName"
+                        style="width: 200px;" />
+                </el-form-item>
+                <el-form-item label="品牌LOGO" label-width="100px" prop="logoUrl">
+                    <el-upload class="avatar-uploader" action="http://sph-api.atguigu.cn/admin/product/fileUpload"
+                        :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                        <img v-if="trademarkParams.logoUrl" :src="trademarkParams.logoUrl" class="avatar" />
+                        <div v-else class="avatar-uploader-icon">
+                            <SvgIcon :iconName="'upload'" :width="'40px'" :height="'40px'" :color="'#8c939d'"
+                                style="margin-top: 38%;" />
+                        </div>
+                    </el-upload>
+                </el-form-item>
+            </el-form>
+            <template #footer>
+                <span class="dialog-footer">
+                    <el-button type="primary" @click="confirm">
+                        <SvgIcon :iconName="'confirm'" :color="'#dcdfe6'" style="margin-right: 6px;" />
+                        确定
                     </el-button>
-                    <el-popconfirm width="250" confirm-button-text="删除" confirm-button-type="danger"
-                        @confirm="removeTrademark(row.id)" cancel-button-text="取消" :icon="Delete" icon-color='#e75e61'
-                        :title="`确定要删除 ${row.tmName} 吗？`">
-                        <template #reference>
-                            <el-button size="default" @click="" color="#dd191d">
-                                <SvgIcon :iconName="'delete'" :color="'white'" :width="'18px'" :height="'18px'" />
-                            </el-button>
-                        </template>
-                    </el-popconfirm>
-
-                </template>
-            </el-table-column>
-        </el-table>
-        <!-- 分页器 -->
-        <el-pagination v-model:current-page="pageNum" v-model:page-size="pageLimt" @current-change="getTradeMarkData"
-            @size-change="getTradeMarkData()" :page-sizes="[5, 10, 20, 50]" layout="total, sizes, prev, pager, next, jumper"
-            :total="total" />
-    </el-card>
-
-
-    <!-- 对话框 -->
-    <el-dialog v-model="dialogFormVisible" :title="trademarkParams.id ? '修改品牌' : '添加品牌'" style="width: 700px;">
-        <el-form :model="trademarkParams" :rules="rules" ref="formRef">
-            <el-form-item label="品牌名称" label-width="100px" prop="tmName">
-                <el-input autocomplete="off" placeholder="请输入品牌名称" v-model="trademarkParams.tmName" style="width: 200px;" />
-            </el-form-item>
-            <el-form-item label="品牌LOGO" label-width="100px" prop="logoUrl">
-                <el-upload class="avatar-uploader" action="http://sph-api.atguigu.cn/admin/product/fileUpload"
-                    :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-                    <img v-if="trademarkParams.logoUrl" :src="trademarkParams.logoUrl" class="avatar" />
-                    <div v-else class="avatar-uploader-icon">
-                        <SvgIcon :iconName="'upload'" :width="'40px'" :height="'40px'" :color="'#8c939d'"
-                            style="margin-top: 38%;" />
-                    </div>
-                </el-upload>
-            </el-form-item>
-        </el-form>
-        <template #footer>
-            <span class="dialog-footer">
-                <el-button type="primary" @click="confirm">
-                    <SvgIcon :iconName="'confirm'" :color="'#dcdfe6'" style="margin-right: 6px;" />
-                    确定
-                </el-button>
-                <el-button color="#e0e0e0" @click="dialogFormVisible = false">
-                    <SvgIcon :iconName="'cancel'" :color="'#707070'" style="margin-right: 6px;" />
-                    取消
-                </el-button>
-            </span>
-        </template>
-    </el-dialog>
+                    <el-button color="#e0e0e0" @click="dialogFormVisible = false">
+                        <SvgIcon :iconName="'cancel'" :color="'#707070'" style="margin-right: 6px;" />
+                        取消
+                    </el-button>
+                </span>
+            </template>
+        </el-dialog>
+    </div>
 </template>
 
 <script setup lang="ts">
