@@ -5,7 +5,8 @@
                 <SvgIcon :iconName="'plus'" :color="'white'" />添加品牌
             </el-button>
             <!-- 表格 -->
-            <el-table :data="tradeMarkArr" border style="margin: 10px 0;">
+            <el-table :data="tradeMarkArr" border style="margin: 10px 0;" v-loading="loading"
+                element-loading-text="正在加载中，请稍候...">
                 <el-table-column prop="id" label="序号" width="80" align="center" />
                 <el-table-column prop="tmName" label="品牌名称" />
                 <el-table-column prop="logoUrl" label="品牌LOGO">
@@ -22,7 +23,7 @@
                             @confirm="removeTrademark(row.id)" cancel-button-text="取消" :icon="Delete" icon-color='#e75e61'
                             :title="`确定要删除 ${row.tmName} 吗？`">
                             <template #reference>
-                                <el-button size="default" @click="" color="#dd191d">
+                                <el-button size="default" color="#dd191d">
                                     <SvgIcon :iconName="'delete'" :color="'white'" :width="'18px'" :height="'18px'" />
                                 </el-button>
                             </template>
@@ -95,14 +96,16 @@ let dialogFormVisible = ref<boolean>(false)
 // 定义新增品牌的数据
 let trademarkParams = reactive<TradeMark>({ tmName: '', logoUrl: '', })
 const formRef = ref()
-
+let loading = ref(false)
 
 const getTradeMarkData = async (pager = 1) => {
     // 如果不传参 则默认获取第一页的数据
+    loading.value = true
     pageNum.value = pager
     await getTradeMarkList(pageNum.value, pageLimt.value).then(resp => {
         total.value = resp.data.total
         tradeMarkArr.value = resp.data.records
+        loading.value = false
     })
 }
 

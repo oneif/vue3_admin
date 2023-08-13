@@ -2,10 +2,10 @@
 import request from "@/utils/request"
 import type { TradeMarkResponseData, TradeMark } from "./type"
 enum API {
-    TRADEMARK_API = "/admin/product/baseTrademark/",
-    ADDTRADEMARK_API = "/admin/product/baseTrademark/save",
-    EDITTRADEMARK_API = "/admin/product/baseTrademark/update",
-    DELETETRADEMARK_API = "/admin/product/baseTrademark/remove/",
+    TRADEMARK_URL = "/admin/product/baseTrademark/",
+    ADDTRADEMARK_URL = "/admin/product/baseTrademark/save",
+    EDITTRADEMARK_URL = "/admin/product/baseTrademark/update",
+    DELETETRADEMARK_URL = "/admin/product/baseTrademark/remove/",
 }
 
 /**
@@ -15,7 +15,7 @@ enum API {
  */
 export const getTradeMarkList = (page: number, limit: number) => {
     return request.get<any, TradeMarkResponseData>(
-        API.TRADEMARK_API + `${page}/${limit}`,
+        API.TRADEMARK_URL + `${page}/${limit}`,
     )
 }
 /**
@@ -23,13 +23,13 @@ export const getTradeMarkList = (page: number, limit: number) => {
  * @param TradeMark:品牌的数据
  */
 export const AddAndEditTradeMark = (data: TradeMark) => {
-    if (data.id) return request.put<any, any>(API.EDITTRADEMARK_API, data)
-    else return request.post<any, any>(API.ADDTRADEMARK_API, data)
+    if (data.id) return request.put<any, any>(API.EDITTRADEMARK_URL, data)
+    else return request.post<any, any>(API.ADDTRADEMARK_URL, data)
 }
 /**
  * @description:删除品牌接口
  * @param id:要删除的品牌的id
  */
 export const deleteTrademark = (id: number) => {
-    return request.delete<any, any>(API.DELETETRADEMARK_API + id)
+    return request.delete<any, any>(API.DELETETRADEMARK_URL + id)
 }

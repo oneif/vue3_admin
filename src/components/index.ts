@@ -2,7 +2,8 @@
 import type { App, Component } from "vue"
 
 import SvgIcon from "@/components/SvgIcon/index.vue"
-const globalComponents: { [name: string]: Component } = { SvgIcon }
+import Category from "@/components/Category/index.vue"
+const globalComponents: { [name: string]: Component } = { SvgIcon, Category }
 export default {
     // 只能叫做install方法，因为vue3中插件必须要有install方法
     install(app: App) {
