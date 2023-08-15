@@ -32,6 +32,7 @@ export interface AttrObj {
     categoryId?: number
     categoryLevel: number
     attrValueList: AttrValueList
+    attrIdAndValueId?: string
 }
 export type AttrObjList = AttrObj[]
 // 属性接口返回的数据类型

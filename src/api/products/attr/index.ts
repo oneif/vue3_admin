@@ -16,15 +16,15 @@ enum API {
     DELETEATTR_URL = "/admin/product/deleteAttr/",
 }
 /**
- * @description:获取商品一级分类
- * @param:null
+ * @description 获取商品一级分类
+ * @param null
  */
 export const getCategory1 = () => {
     return request.get<any, CategoryResponseData>(API.GETCATEGOTY1_URL)
 }
 /**
- * @description:获取商品二级分类
- * @param:一级分类id
+ * @description 获取商品二级分类
+ * @param 一级分类id
  */
 export const getCategory2 = (category1_id: any) => {
     return request.get<any, CategoryResponseData>(
@@ -32,8 +32,8 @@ export const getCategory2 = (category1_id: any) => {
     )
 }
 /**
- * @description:获取商品三级分类
- * @param:二级分类id
+ * @description 获取商品三级分类
+ * @param 二级分类id
  */
 export const getCategory3 = (category2_id: any) => {
     return request.get<any, CategoryResponseData>(
@@ -41,8 +41,8 @@ export const getCategory3 = (category2_id: any) => {
     )
 }
 /**
- * @description:根据分类获取商品属性
- * @param:一级分类id,二级分类id,san级分类id
+ * @description 根据分类获取商品属性
+ * @param 一级分类id,二级分类id,三级分类id
  */
 export const getAttr = (
     category1_id: any,
@@ -54,15 +54,15 @@ export const getAttr = (
     )
 }
 /**
- * @description:新增或修改已有的属性接口
- * @param:没有id新增，有id修改
+ * @description 新增或修改已有的属性接口
+ * @param 没有id新增，有id修改
  */
 export const addOrUpdateAttr = (data: AttrObj) => {
     return request.post<any, ResponseData>(API.ADDORUPDATE_URL, data)
 }
 /**
- * @description:删除已有属性接口
- * @param:attrid
+ * @description 删除已有属性接口
+ * @param attrid
  */
 export const removeAttr = (attrid: number) => {
     return request.delete<any, ResponseData>(API.DELETEATTR_URL + attrid)

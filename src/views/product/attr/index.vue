@@ -23,7 +23,7 @@
                     </el-table-column>
                     <el-table-column prop="tmName" label="操作" width="240">
                         <template #="{ row }">
-                            <el-button size="default" @click="editAttr(row)" color="#3f51b5">
+                            <el-button @click="editAttr(row)" color="#3f51b5">
                                 <SvgIcon :iconName="'edit'" :color="'white'" :width="'18px'" :height="'18px'" />
                             </el-button>
                             <el-popconfirm width="250" confirm-button-text="删除" confirm-button-type="danger"
