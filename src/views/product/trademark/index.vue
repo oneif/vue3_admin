@@ -16,7 +16,7 @@
                 </el-table-column>
                 <el-table-column prop="address" label="品牌操作">
                     <template #="{ row }">
-                        <el-button size="default" @click="editTrademark(row)" color="#3f51b5">
+                        <el-button @click="editTrademark(row)" color="#3f51b5">
                             <SvgIcon :iconName="'edit'" :color="'white'" :width="'18px'" :height="'18px'" />
                         </el-button>
                         <el-popconfirm width="250" confirm-button-text="删除" confirm-button-type="danger"
@@ -59,12 +59,12 @@
             </el-form>
             <template #footer>
                 <span class="dialog-footer">
-                    <el-button type="primary" @click="confirm">
+                    <el-button color="#4527a0" @click="confirm">
                         <SvgIcon :iconName="'confirm'" :color="'#dcdfe6'" style="margin-right: 6px;" />
                         确定
                     </el-button>
-                    <el-button color="#e0e0e0" @click="dialogFormVisible = false">
-                        <SvgIcon :iconName="'cancel'" :color="'#707070'" style="margin-right: 6px;" />
+                    <el-button color="#dd191d" @click="dialogFormVisible = false">
+                        <SvgIcon :iconName="'cancel'" :color="'white'" style="margin-right: 6px;" />
                         取消
                     </el-button>
                 </span>

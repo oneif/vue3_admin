@@ -37,7 +37,7 @@ export default {
 }
 
 .fade-enter-active {
-    transition: all .5s;
+    transition: all .4s;
 }
 
 .fade-enter-to {
