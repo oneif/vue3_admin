@@ -178,9 +178,8 @@ const searchUser = () => {
     keywords.value = ''
 }
 // 重置
-const reset = () => {
-    settingStore.refresh = !settingStore.refresh
-}
+const reset = () => settingStore.refresh = !settingStore.refresh
+
 
 // 表单校验规则
 const formRules = {
@@ -311,5 +310,3 @@ onMounted(() => {
     getUserInfo()
 })
 </script>
-
-<style scoped></style>
