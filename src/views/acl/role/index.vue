@@ -107,9 +107,9 @@
 <script setup lang="ts">
 import { ref, onMounted, reactive, nextTick, } from 'vue'
 import { ElMessage } from 'element-plus'
+import { Delete } from '@element-plus/icons-vue'
 import { getRole, addAndUpdateRole, getAllMenuList, setPermisstionById, removeRole } from "@/api/acl/role"
 import type { RoleData, MenuList } from "@/api/acl/role/type"
-import { Delete } from '@element-plus/icons-vue'
 import useLayoutSettingStore from '@/store/modules/setting'
 
 const defaultProps = {
@@ -242,5 +242,3 @@ onMounted(() => {
     getRoleList()
 })
 </script>
-
-<style scoped></style>
