@@ -4,6 +4,8 @@ import App from "@/App.vue"
 import ElementPlus from "element-plus"
 import "element-plus/dist/index.css"
 import zhCn from "element-plus/dist/locale/zh-cn.mjs"
+// 暗黑模式
+import "element-plus/theme-chalk/dark/css-vars.css"
 // svg插件
 import "virtual:svg-icons-register"
 // 注册全局组件
