@@ -1,21 +1,42 @@
 <template>
-    <div class="login_container">
-        <el-row>
-            <el-col :span="14" :xs="0"></el-col>
-            <el-col :span="10" :xs="24">
-                <el-form ref="loginFormRef" class="login_form" :model="loginForm" :rules="rules">
-                    <h1>Hello</h1>
-                    <h2>欢迎来到硅谷甄选</h2>
+    <div class="login-container flx-center">
+        <div class="login-box">
+            <div class="login-left">
+                <img src="@/assets/images/login_left0.png" alt="login" />
+            </div>
+            <div class="login-form">
+                <div class="login-logo">
+                    <img class="login-icon" src="../../../public/huawei_logo.png" alt="" />
+                    <h2 class="logo-text">灵犀后台</h2>
+                </div>
+                <el-form ref="loginFormRef" :model="loginForm" :rules="rules" size="large">
                     <el-form-item prop="username">
-                        <el-input :prefix-icon="User" v-model="loginForm.username"></el-input>
+                        <el-input v-model="loginForm.username">
+                            <template #prefix>
+                                <el-icon class="el-input__icon">
+                                    <user />
+                                </el-icon>
+                            </template>
+                        </el-input>
                     </el-form-item>
                     <el-form-item prop="password">
-                        <el-input type="password" :prefix-icon="Lock" v-model="loginForm.password" show-password></el-input>
+                        <el-input type="password" v-model="loginForm.password" show-password autocomplete="new-password">
+                            <template #prefix>
+                                <el-icon class="el-input__icon">
+                                    <lock />
+                                </el-icon>
+                            </template>
+                        </el-input>
                     </el-form-item>
-                    <el-button :loading="loading" type="primary" size="default" @click="login">登录</el-button>
                 </el-form>
-            </el-col>
-        </el-row>
+                <div class="login-btn">
+                    <el-button round @click="login" size="large" type="primary" :loading="loading">
+                        登录
+                    </el-button>
+                    <el-button round @click="resetForm(loginFormRef)" size="large">重置</el-button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -78,45 +99,131 @@ const login = async () => {
             duration: 3000,
         })
     });
-
 }
+const resetForm = (formEl: any) => {
+    if (!formEl) return;
+    formEl.resetFields();
+};
 
 </script>
 
 <style scoped lang="scss">
-.login_container {
-    width: 100%;
-    height: 100vh;
-    background: url('@/assets/images/background.jpg') no-repeat;
-    background-size: cover;
-}
+// .login_container {
+//     width: 100%;
+//     height: 100vh;
+//     background: url('@/assets/images/background.jpg') no-repeat;
+//     background-size: cover;
+// }
 
-.login_form {
+// .login_form {
+//     position: relative;
+//     width: 70%;
+//     top: 30vh;
+//     background: url('@/assets/images/login_form.png') no-repeat;
+//     background-size: cover;
+//     padding: 40px;
+
+//     h1 {
+//         font-size: 40px;
+//         color: #fff;
+//     }
+
+//     h2 {
+//         font-size: 20px;
+//         color: #fff;
+//         margin: 20px 0;
+//     }
+
+//     .el-input {
+//         max-width: 500px;
+//     }
+
+//     .el-button {
+//         display: block;
+//         width: 100%;
+//     }
+// }
+
+.login-container {
     position: relative;
-    width: 70%;
-    top: 30vh;
-    background: url('@/assets/images/login_form.png') no-repeat;
+    min-width: 550px;
+    height: 100%;
+    width: 100%;
+    min-height: 500px;
+    background-color: #eeeeee;
+    background-image: url("@/assets/images/login_bg.svg");
+    background-position: 50%;
+    background-size: 100% 100%;
     background-size: cover;
-    padding: 40px;
 
-    h1 {
-        font-size: 40px;
-        color: #fff;
-    }
+    .login-box {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 70%;
+        height: 70%;
+        padding: 0 50px;
+        background-color: hsl(0deg 0% 100% / 80%);
+        border-radius: 10px;
 
-    h2 {
-        font-size: 20px;
-        color: #fff;
-        margin: 20px 0;
-    }
+        .login-left {
+            width: 800px;
 
-    .el-input {
-        max-width: 500px;
-    }
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
 
-    .el-button {
-        display: block;
-        width: 100%;
+        .login-form {
+            width: 430px;
+            min-width: 350px;
+            padding: 50px 40px 45px;
+            border-radius: 10px;
+            box-shadow: 2px 3px 7px rgb(0 0 0 / 20%);
+
+            .login-logo {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 45px;
+
+                .login-icon {
+                    width: 60px;
+                    height: 52px;
+                }
+
+                .logo-text {
+                    padding: 0 0 0 25px;
+                    margin: 0;
+                    font-size: 42px;
+                    font-weight: bold;
+                    color: #34495e;
+                    white-space: nowrap;
+                }
+            }
+
+            .el-form-item {
+                margin-bottom: 30px;
+            }
+
+            .login-btn {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                margin-top: 40px;
+                white-space: nowrap;
+
+                .el-button {
+                    width: 185px;
+                }
+            }
+        }
     }
 }
 </style>
