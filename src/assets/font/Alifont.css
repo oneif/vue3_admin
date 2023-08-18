@@ -1,0 +1,7 @@
+@font-face {
+    font-family: "Alifont";
+    src: url("./alifont/AlimamaDaoLiTi.woff2") format("woff2"),
+    url("./alifont/AlimamaDaoLiTi.woff") format("woff"),
+    url("./alifont/AlimamaDaoLiTi.ttf") format("truetype");
+    font-display: swap;
+  }
