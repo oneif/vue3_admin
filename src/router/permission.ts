@@ -28,7 +28,9 @@ router.beforeEach(
                     // 没有用户信息 发请求拿到用户信息再放行
                     try {
                         await userStore.getUserInfo()
-                        next()
+                        // 如果在异步路由的界面刷新，这时候会出现异步路由还没加载完就放行
+                        // 所以在next中卡住，只到加载完再放行
+                        next({ ...to, replace: true })
                     } catch (error) {
                         // token过期:获取不到用户信息了
                         // 用户修改了本地存储的token

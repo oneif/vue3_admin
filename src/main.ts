@@ -18,6 +18,8 @@ import router from "@/router/index.ts"
 import "@/router/permission"
 // 仓库
 import store from "@/store/index.ts"
+// 自定义指令
+import { isHasButton } from "@/directive/hasButton.ts"
 
 const app = createApp(App)
 
@@ -27,5 +29,6 @@ app.use(ElementPlus, {
 app.use(globalComponent)
 app.use(router)
 app.use(store)
+isHasButton(app)
 
 app.mount("#app")

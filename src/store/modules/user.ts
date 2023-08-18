@@ -4,9 +4,23 @@ import { ref } from "vue"
 // 导入接口
 import { login, getInfo, logout } from "@/api/users"
 import type { loginForm } from "@/api/users/type"
+import router from "@/router"
 import type { RouteRecordRaw } from "vue-router"
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from "@/utils/token"
-import { constantRoutes } from "@/router/routers"
+import { constantRoutes, asyncRoutes, anyRoutes } from "@/router/routers"
+// 引入深拷贝
+import cloneDeep from "lodash/cloneDeep"
+
+// 用于过滤当前用户需要展示的异步路由 asyncRoutes所有的异步路由 userRoutes获取到的用户路由
+const filterAsyncRoutes = (asyncRoutes: any, userRoutes: any) => {
+    return asyncRoutes.filter((item: any) => {
+        if (userRoutes.includes(item.name)) {
+            if (item.children && item.children.length > 0)
+                item.children = filterAsyncRoutes(item.children, userRoutes)
+            return true
+        }
+    })
+}
 
 let useUserStore = defineStore("User", () => {
     let token = ref<string | null>("")
@@ -23,12 +37,31 @@ let useUserStore = defineStore("User", () => {
     }
     let username = ref("")
     let avatar = ref("")
+    // 仓库存储生成菜单需要的路由
+    let menuRoutes = ref<RouteRecordRaw[]>(constantRoutes)
+    // 存储当前用户是否拥有某个按钮
+    let buttons = ref<string[]>([])
+    // let menuRoutes = constantRoutes
     // 获取用户信息的方法
     const getUserInfo = async () => {
         await getInfo().then((resp) => {
             if (resp.code == 200) {
                 username.value = resp.data.name
                 avatar.value = resp.data.avatar
+                buttons.value = resp.data.buttons
+                let userAsyncRoute = filterAsyncRoutes(
+                    cloneDeep(asyncRoutes),
+                    resp.data.routes,
+                )
+                menuRoutes.value = [
+                    ...constantRoutes,
+                    ...userAsyncRoute,
+                    ...anyRoutes,
+                ]
+                console.log(menuRoutes)
+                ;[...userAsyncRoute, ...anyRoutes].forEach((route: any) =>
+                    router.addRoute(route),
+                )
                 return Promise.resolve(resp)
             } else return Promise.reject(new Error(resp.message))
         })
@@ -47,8 +80,6 @@ let useUserStore = defineStore("User", () => {
         })
     }
 
-    // 仓库存储生成菜单需要的路由
-    let menuRoutes: RouteRecordRaw[] = constantRoutes
     return {
         token,
         userLogin,
@@ -56,6 +87,7 @@ let useUserStore = defineStore("User", () => {
         getUserInfo,
         username,
         avatar,
+        buttons,
         userLogout,
     }
 })

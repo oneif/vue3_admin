@@ -1,4 +1,4 @@
-// 常量路由
+// 常量路由(任何人都可以访问)
 export const constantRoutes = [
     {
         // 登录页面
@@ -36,6 +36,29 @@ export const constantRoutes = [
         ],
     },
     {
+        path: "/screen",
+        component: () => import("@/views/screen/index.vue"),
+        name: "Screen",
+        meta: {
+            title: "数据大屏",
+            show: true,
+            icon: "screen",
+        },
+    },
+    {
+        // 404
+        path: "/404",
+        component: () => import("@/views/404/index.vue"),
+        meta: {
+            title: "404",
+            show: false,
+        },
+    },
+]
+
+// 异步路由
+export const asyncRoutes = [
+    {
         path: "/acl",
         component: () => import("@/layout/index.vue"),
         name: "Acl",
@@ -49,7 +72,7 @@ export const constantRoutes = [
             {
                 path: "/acl/user",
                 component: () => import("@/views/acl/user/index.vue"),
-                name: "Acl",
+                name: "User",
                 meta: {
                     title: "用户管理",
                     show: true,
@@ -131,27 +154,10 @@ export const constantRoutes = [
             },
         ],
     },
-    {
-        path: "/screen",
-        component: () => import("@/views/screen/index.vue"),
-        name: "Screen",
-        meta: {
-            title: "数据大屏",
-            show: true,
-            icon: "screen",
-        },
-    },
-    // {},
-    // {},
-    {
-        // 404
-        path: "/404",
-        component: () => import("@/views/404/index.vue"),
-        meta: {
-            title: "404",
-            show: false,
-        },
-    },
+]
+
+// 任意路由
+export const anyRoutes = [
     {
         // 任意
         path: "/:pathMatch(.*)*",
