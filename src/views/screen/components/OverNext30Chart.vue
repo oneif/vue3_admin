@@ -78,7 +78,7 @@ const initChart = (data: any = {}): ECharts => {
 				data: initDate()
 			}
 		],
-		yAxis: data.unit.map((val: ChartProp, index: number) => {
+		yAxis: data.unit.map((_val: ChartProp, index: number) => {
 			return {
 				name: "(访问量)",
 				nameTextStyle: {
@@ -196,6 +196,7 @@ defineExpose({
 .echarts {
 	width: 100%;
 	height: 100%;
+
 	:deep(.lineChart-bg) {
 		box-sizing: border-box;
 		display: flex;
@@ -205,14 +206,15 @@ defineExpose({
 		padding-left: 20px;
 		background: url("../images/line-bg.png") no-repeat;
 		background-size: 100% 100%;
+
 		span {
 			font-size: 12px;
 			color: rgb(255 255 255 / 80%);
+
 			i {
 				font-style: normal;
 				color: #f5b348;
 			}
 		}
 	}
-}
-</style>
+}</style>

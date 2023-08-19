@@ -4,13 +4,13 @@ import { ref } from "vue"
 import { getCategory1, getCategory2, getCategory3 } from "@/api/products/attr"
 import type { CategoryObj } from "@/api/products/attr/type"
 
-let useCategoryStore = defineStore("Category", () => {
-    let category1Arr = ref<CategoryObj[]>([])
-    let category1Id = ref<number>()
-    let category2Arr = ref<CategoryObj[]>([])
-    let category2Id = ref<number>()
-    let category3Arr = ref<CategoryObj[]>([])
-    let category3Id = ref<number>()
+const useCategoryStore = defineStore("Category", () => {
+    const category1Arr = ref<CategoryObj[]>([])
+    const category1Id = ref<number>()
+    const category2Arr = ref<CategoryObj[]>([])
+    const category2Id = ref<number>()
+    const category3Arr = ref<CategoryObj[]>([])
+    const category3Id = ref<number>()
 
     // 获取一级分类的方法
     const getCategoryList1 = async () => {

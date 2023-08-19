@@ -6,13 +6,13 @@ import { RouteLocationNormalized, NavigationGuardNext } from "vue-router"
 import Pinia from "../store"
 import useUserStore from "@/store/modules/user"
 
-let userStore = useUserStore(Pinia)
+const userStore = useUserStore(Pinia)
 
 // 全局前置守卫
 router.beforeEach(
     async (
         to: RouteLocationNormalized,
-        from: RouteLocationNormalized,
+        _from: RouteLocationNormalized,
         next: NavigationGuardNext,
     ) => {
         nprogress.start()
@@ -52,7 +52,7 @@ router.beforeEach(
 )
 // 全局后置守卫
 router.afterEach(
-    (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
+    (to: RouteLocationNormalized, _from: RouteLocationNormalized) => {
         nprogress.done()
         document.title = "灵犀后台管理系统-" + to.meta.title
     },

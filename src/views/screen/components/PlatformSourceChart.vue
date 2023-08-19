@@ -190,7 +190,7 @@ const initChart = (data: any = {}): ECharts => {
 				labelLine: {
 					show: false
 				},
-				data: new Array(150).fill("").map((val: string, index: number) => {
+				data: new Array(150).fill("").map((_val: string, index: number) => {
 					if (index % 3 === 0) {
 						return {
 							name: (index + 1).toString(),

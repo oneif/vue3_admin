@@ -164,7 +164,7 @@ const confirm = async () => {
     })
 }
 
-const validatorLogourl = (rule: any, value: any, callback: any) => {
+const validatorLogourl = (_rule: any, value: any, callback: any) => {
     if (value) {
         callback()
     } else {

@@ -2,6 +2,7 @@ export interface ResponseData {
     code: number
     message: string
     ok: boolean
+    data: any
 }
 export interface Attr {
     attrId: number //平台属性的ID
@@ -27,6 +28,7 @@ export interface SkuData {
     skuSaleAttrValueList?: saleArr[]
     skuDefaultImg?: string //sku图片地址
     id?: number
+    skuImageList?: any
 }
 
 export interface SkuResponseData extends ResponseData {

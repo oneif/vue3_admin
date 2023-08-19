@@ -1,6 +1,6 @@
 export const getTime = () => {
     let message: string = ""
-    let hours: number = new Date().getHours()
+    const hours: number = new Date().getHours()
     if (hours <= 9) {
         message = "早上好🌞"
     } else if (hours <= 12) {

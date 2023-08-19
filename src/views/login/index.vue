@@ -76,7 +76,7 @@ let message = getTime()
 const login = async () => {
     await loginFormRef.value.validate()
     loading.value = true
-    userStore.userLogin(loginForm).then(resp => {
+    userStore.userLogin(loginForm).then(_resp => {
         // 成功的回调 跳转到首页
         router.push('/')
 

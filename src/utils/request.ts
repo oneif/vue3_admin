@@ -2,7 +2,7 @@ import axios from "axios"
 import { ElMessage } from "element-plus"
 // 引入用户相关的仓库
 import useUserStore from "@/store/modules/user"
-let request = axios.create({
+const request = axios.create({
     baseURL: "http://sph-api.atguigu.cn",
     timeout: 60000,
 })
@@ -20,7 +20,7 @@ request.interceptors.response.use(
     (err) => {
         console.log(err)
 
-        let msg: string = err.code
+        const msg: string = err.code
         // let status = err.response.status
         // switch (status) {
         //     case 401:

@@ -2,8 +2,8 @@
 import { defineStore } from "pinia"
 import { ref } from "vue"
 
-let useLayoutSettingStore = defineStore("SettingStore", () => {
-    let refresh = ref(false)
+const useLayoutSettingStore = defineStore("SettingStore", () => {
+    const refresh = ref(false)
     const updateRefresh = () => {
         refresh.value = !refresh.value
     }

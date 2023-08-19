@@ -22,8 +22,8 @@ const filterAsyncRoutes = (asyncRoutes: any, userRoutes: any) => {
     })
 }
 
-let useUserStore = defineStore("User", () => {
-    let token = ref<string | null>("")
+const useUserStore = defineStore("User", () => {
+    const token = ref<string | null>("")
     token.value = GET_TOKEN()
     // 用户登录的方法
     const userLogin = async (data: loginForm) => {
@@ -35,12 +35,12 @@ let useUserStore = defineStore("User", () => {
             } else return Promise.reject(resp)
         })
     }
-    let username = ref("")
-    let avatar = ref("")
+    const username = ref("")
+    const avatar = ref("")
     // 仓库存储生成菜单需要的路由
-    let menuRoutes = ref<RouteRecordRaw[]>(constantRoutes)
+    const menuRoutes = ref<RouteRecordRaw[]>(constantRoutes)
     // 存储当前用户是否拥有某个按钮
-    let buttons = ref<string[]>([])
+    const buttons = ref<string[]>([])
     // let menuRoutes = constantRoutes
     // 获取用户信息的方法
     const getUserInfo = async () => {
@@ -49,7 +49,7 @@ let useUserStore = defineStore("User", () => {
                 username.value = resp.data.name
                 avatar.value = resp.data.avatar
                 buttons.value = resp.data.buttons
-                let userAsyncRoute = filterAsyncRoutes(
+                const userAsyncRoute = filterAsyncRoutes(
                     cloneDeep(asyncRoutes),
                     resp.data.routes,
                 )
